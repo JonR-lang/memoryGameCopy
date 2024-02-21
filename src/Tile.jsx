@@ -1,15 +1,27 @@
+import { motion } from "framer-motion";
+
 export function Tile({ content: Content, flip, state }) {
-  switch (state) {
-    case "start":
-      return (
+  const containerVariants = {
+    start: { rotateY: 0, perspective: 500 },
+    flipped: { rotateY: 180, perspective: 500 },
+    matched: { rotateY: 180, perspective: 500 },
+  };
+
+  return (
+    <motion.div
+      className='inline-block size-full relative flip '
+      variants={containerVariants}
+      initial='start'
+      transition={{ duration: 0.5 }}
+      animate={state}>
+      {state !== "matched" && (
         <Back
-          className='inline-block size-full bg-backOfTile rounded-lg'
+          className='flex size-full bg-backOfTile rounded-lg absolute z-30'
           flip={flip}
         />
-      );
-    case "flipped":
-      return (
-        <Front className='size-full bg-frontOfTile rounded-lg flex items-center justify-center relative'>
+      )}
+      {state !== "matched" && (
+        <Front className='size-full bg-frontOfTile rounded-lg flex items-center justify-center absolute'>
           <Content
             style={{
               width: "80%",
@@ -19,9 +31,8 @@ export function Tile({ content: Content, flip, state }) {
             }}
           />
         </Front>
-      );
-    case "matched":
-      return (
+      )}
+      {state === "matched" && (
         <Matched className='size-full flex items-center justify-center relative'>
           <Content
             style={{
@@ -32,14 +43,18 @@ export function Tile({ content: Content, flip, state }) {
             }}
           />
         </Matched>
-      );
-    default:
-      throw new Error("Invalid state " + state);
-  }
+      )}
+    </motion.div>
+  );
 }
 
 function Back({ className, flip }) {
-  return <div onClick={flip} className={className}></div>;
+  return (
+    <div
+      onClick={flip}
+      className={className}
+      style={{ backfaceVisibility: "hidden" }}></div>
+  );
 }
 
 function Front({ className, children }) {
