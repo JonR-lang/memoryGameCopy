@@ -19,13 +19,13 @@ export function Tile({ content: Content, flip, state }) {
       animate={state}>
       {state !== "matched" && (
         <Back
-          className='flex size-full bg-backOfTile rounded-lg absolute z-30 dark:bg-slate-900'
+          className='flex size-full bg-backOfTile rounded-lg absolute z-10 dark:bg-slate-900'
           flip={flip}
         />
       )}
       {state !== "matched" && (
         <Front
-          className={`size-full bg-frontOfTile rounded-lg flex items-center justify-center absolute dark:bg-black/40 ${
+          className={`size-full bg-frontOfTile rounded-lg flex items-center justify-center absolute z-10 dark:bg-black/40 ${
             state === "flipped" && "dark:custom-shadow"
           }`}>
           <Content
