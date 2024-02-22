@@ -37,7 +37,7 @@ export function StartScreen({ start }) {
           <p>Flip over the tiles looking for pairs</p>
           <button
             onClick={start}
-            className='bg-pink-500 text-white p-3 px-12 rounded-full dark:bg-pink-500/80 dark:text-slate-900 hover:custom-cursor-pointer'>
+            className='bg-pink-500 text-white p-3 px-12 rounded-full dark:bg-pink-500/80 hover:scale-105 duration-150 ease-linear dark:text-slate-900 hover:custom-cursor-pointer'>
             Play
           </button>
         </div>
