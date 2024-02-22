@@ -19,7 +19,7 @@ export function Tile({ content: Content, flip, state }) {
       animate={state}>
       {state !== "matched" && (
         <Back
-          className='flex size-full bg-backOfTile rounded-lg absolute z-10 dark:bg-slate-900'
+          className='flex size-full bg-backOfTile rounded-lg absolute z-20 dark:bg-slate-900'
           flip={flip}
         />
       )}
