@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StartScreen, PlayScreen } from "./Screens";
 
 function App() {
-  const [gameState, setGameState] = useState("start");
+  const [gameState, setGameState] = useState(() => {
+    const savedState = JSON.parse(localStorage.getItem("memoryGame"));
+    return savedState || "start";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("memoryGame", JSON.stringify(gameState));
+  }, [gameState]);
 
   switch (gameState) {
     case "start":

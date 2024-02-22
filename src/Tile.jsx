@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import useDarkMode from "./hooks/theme";
 
 export function Tile({ content: Content, flip, state }) {
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+
   const containerVariants = {
     start: { rotateY: 0, perspective: 500 },
     flipped: { rotateY: 180, perspective: 500 },
@@ -16,18 +19,21 @@ export function Tile({ content: Content, flip, state }) {
       animate={state}>
       {state !== "matched" && (
         <Back
-          className='flex size-full bg-backOfTile rounded-lg absolute z-30'
+          className='flex size-full bg-backOfTile rounded-lg absolute z-30 dark:bg-slate-900'
           flip={flip}
         />
       )}
       {state !== "matched" && (
-        <Front className='size-full bg-frontOfTile rounded-lg flex items-center justify-center absolute'>
+        <Front
+          className={`size-full bg-frontOfTile rounded-lg flex items-center justify-center absolute dark:bg-black/40 ${
+            state === "flipped" && "dark:custom-shadow"
+          }`}>
           <Content
+            className='text-white dark:text-frontOfTile'
             style={{
               width: "80%",
               height: "80%",
               position: "absolute",
-              color: "white",
             }}
           />
         </Front>
@@ -35,6 +41,7 @@ export function Tile({ content: Content, flip, state }) {
       {state === "matched" && (
         <Matched className='size-full flex items-center justify-center relative'>
           <Content
+            className='dark:opacity-50'
             style={{
               width: "80%",
               height: "80%",
