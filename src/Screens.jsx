@@ -170,7 +170,7 @@ export function PlayScreen({ end }) {
         </button>
       </div>
 
-      <div className='min-h-screen overflow-y-auto w-full flex items-center justify-center p-4 flex-col gap-4 text-center dark:bg-[#002347] custom-cursor'>
+      <div className='min-h-screen overflow-y-auto w-full flex items-center justify-center p-4 flex-col gap-4 text-center dark:custom-bg custom-cursor'>
         <span className='w-full flex items-center justify-center gap-2 text-xl text-indigo-600 sm:text-2xl lg:text-3xl'>
           Tries:
           <span className='inline-block sm:h-7 sm:-mt-1 rounded-md bg-numberOfTriesBg px-2 dark:bg-transparent'>
