@@ -23,6 +23,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    padding-top: constant(safe-area-inset-top);
   }
 
   .custom-bg-start {
