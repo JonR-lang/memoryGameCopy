@@ -31,11 +31,6 @@
     background-size: cover;
   }
 
-  .custom-backdrop {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
   .custom-shadow {
     box-shadow: 1px 1px 30px rgba(100, 102, 241, 0.05);
   }
