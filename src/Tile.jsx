@@ -25,7 +25,7 @@ export function Tile({ content: Content, flip, state }) {
       )}
       {state !== "matched" && (
         <Front
-          className="size-full bg-frontOfTile rounded-lg flex items-center justify-center absolute z-10 dark:bg-black/40"
+          className={`size-full bg-frontOfTile rounded-lg flex items-center justify-center absolute z-10 dark:bg-black/40 ${ state === "flipped" && "dark:custom-shadow" }`}
         >
           <Content
             className='text-white dark:text-frontOfTile'
