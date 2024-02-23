@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.dark {
+  background: "#0E1B2A"
+}
+
 .flip {
   transform-style: preserve-3d;
 }
+
+
 
 @layer components {
   .custom-bg {
