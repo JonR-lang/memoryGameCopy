@@ -15,7 +15,7 @@
 @layer components {
   .custom-bg-mobile {
     background-image: linear-gradient(
-        to right,
+        to bottom,
         #020617,
         transparent,
         transparent,
@@ -30,7 +30,7 @@
   
   .custom-bg {
     background-image: linear-gradient(
-        to bottom,
+        to right,
         rgba(0, 0, 0, 0.1),
         rgba(0, 0, 0, 0.8)
       ),
