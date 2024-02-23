@@ -178,7 +178,7 @@ export function PlayScreen({ end }) {
           </span>
         </span>
 
-        <div className='w-full max-w-md aspect-square bg-blue-100 rounded-xl p-3 grid grid-cols-4 place-items-center gap-3 dark:bg-black/40 dark:custom-backdrop'>
+        <div className='w-full max-w-md aspect-square bg-blue-100 rounded-xl p-3 grid grid-cols-4 place-items-center gap-3 dark:bg-black/40'>
           {getTiles(selectedValue).map((tile, i) => (
             <Tile key={i} flip={() => flip(i)} {...tile} />
           ))}
