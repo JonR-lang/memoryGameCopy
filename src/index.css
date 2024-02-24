@@ -11,6 +11,21 @@
 }
 
 @layer components {
+  .custom-bg-mobile {
+    background-image: linear-gradient(
+        to bottom,
+        #020617,
+        transparent,
+        transparent,
+        transparent,
+        rgba(0, 0, 0, 0.5)
+      ),
+      url("https://images.unsplash.com/photo-1483401757487-2ced3fa77952?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
   .custom-bg {
     background-image: linear-gradient(
         to right,
@@ -65,13 +80,8 @@
     background-size: cover;
   }
 
-  .custom-backdrop {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
   .custom-shadow {
-    box-shadow: 1px 1px 30px rgba(100, 102, 241, 0.05);
+    box-shadow: 1px 1px 30px rgba(100, 102, 241, 0.075);
   }
 
   .custom-cursor {
