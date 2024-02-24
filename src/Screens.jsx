@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
+import ReactAudioPlayer from "react-audio-player";
 import * as icons from "react-icons/gi";
 import { Tile } from "./Tile";
 import useDarkMode from "./hooks/theme";
 import StarField from "./components/Star";
+import soundEffectSrc from "./assets/spa-relax.mp3";
+import Flip from "./assets/flip.wav";
 
 export const possibleTileContents = [
   icons.GiHearts,
@@ -62,6 +65,20 @@ export function PlayScreen({ end }) {
     setSelectedValue(value);
   };
 
+  const playFlipSound = () => {
+    const soundEffect = new Audio(Flip);
+    soundEffect.play();
+  };
+
+  const playBgMusic = () => {
+    const soundEffect = new Audio(soundEffectSrc);
+    soundEffect.play();
+  };
+
+  // useEffect(() => {
+  //   playBgMusic();
+  // }, []);
+
   useEffect(() => {
     setTiles(null);
     setTryCount(0);
@@ -92,6 +109,7 @@ export function PlayScreen({ end }) {
   };
 
   const flip = (i) => {
+    playFlipSound();
     // Is the tile already flipped? We don’t allow flipping it back.
     if (tiles[i].state === "flipped") return;
 
@@ -180,7 +198,7 @@ export function PlayScreen({ end }) {
         </span>
 
         <StarField numStars={30} />
-
+        <ReactAudioPlayer src={soundEffectSrc} autoPlay loop volume={0.2} />
         <div className='w-full max-w-md aspect-square bg-blue-100 rounded-xl p-3 grid grid-cols-4 place-items-center gap-3 dark:bg-black/40 dark:custom-backdrop'>
           {getTiles(selectedValue).map((tile, i) => (
             <Tile key={i} flip={() => flip(i)} {...tile} />

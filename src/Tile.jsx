@@ -2,8 +2,6 @@ import { motion } from "framer-motion";
 import useDarkMode from "./hooks/theme";
 
 export function Tile({ content: Content, flip, state }) {
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
-
   const containerVariants = {
     start: { rotateY: 0, perspective: 500 },
     flipped: { rotateY: 180, perspective: 500 },
@@ -25,8 +23,9 @@ export function Tile({ content: Content, flip, state }) {
       )}
       {state !== "matched" && (
         <Front
-          className={`size-full bg-frontOfTile rounded-lg flex items-center justify-center absolute z-10 dark:bg-black/40 ${ state === "flipped" && "dark:custom-shadow" }`}
-        >
+          className={`size-full bg-frontOfTile rounded-lg flex items-center justify-center absolute z-10 dark:bg-black/40 ${
+            state === "flipped" && "dark:custom-shadow"
+          }`}>
           <Content
             className='text-white dark:text-frontOfTile'
             style={{
