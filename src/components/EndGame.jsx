@@ -1,18 +1,6 @@
 import { motion } from "framer-motion";
+import { possibleTileContents } from "../Screens";
 import * as icons from "react-icons/gi";
-
-const possibleTileContents = [
-  icons.GiHearts,
-  icons.GiWaterDrop,
-  icons.GiDiceSixFacesFive,
-  icons.GiUmbrella,
-  icons.GiCube,
-  icons.GiBeachBall,
-  icons.GiDragonfly,
-  icons.GiHummingbird,
-  icons.GiFlowerEmblem,
-  icons.GiOpenBook,
-];
 
 const EndGame = ({
   start,
@@ -30,9 +18,9 @@ const EndGame = ({
   console.log();
 
   return (
-    <div className='w-full fixed bg-black/70 inset-0 z-20 flex justify-center items-center overflow-hidden px-10'>
+    <div className='w-full h-full fixed bg-black/70 inset-0 z-20 flex justify-center items-center overflow-hidden p-6'>
       <motion.div
-        className='w-full aspect-square max-w-sm bg-white/90 dark:bg-slate-800/50 dark:backdrop-blur-md rounded-xl flex flex-col justify-center items-center shadow-xl px-4 gap-4 border-2 border-frontOfTile'
+        className='w-full sm:aspect-square max-w-sm bg-white/90 dark:bg-slate-800/50 dark:backdrop-blur-md rounded-xl flex flex-col justify-center items-center shadow-xl p-4 py-5 gap-3 border-2 border-frontOfTile'
         initial={{ y: 1000 }}
         animate={{ y: 0 }}
         transition={{
