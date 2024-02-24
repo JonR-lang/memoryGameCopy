@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import confetti from "canvas-confetti";
 import ReactAudioPlayer from "react-audio-player";
 import * as icons from "react-icons/gi";
@@ -56,6 +56,8 @@ export function PlayScreen({ end }) {
   const [tryCount, setTryCount] = useState(0);
   const [selectedValue, setSelectedValue] = useState(16);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const flipSoundRef = useRef(new Audio(Flip));
+  const winSoundRef = useRef(new Audio(WinSound));
 
   const handleDarkMode = () => {
     toggleDarkMode(!isDarkMode);
@@ -66,20 +68,26 @@ export function PlayScreen({ end }) {
     setSelectedValue(value);
   };
 
-  const playFlipSound = () => {
-    const soundEffect = new Audio(Flip);
-    soundEffect.play();
-  };
-
-  const playWinSound = () => {
-    const soundEffect = new Audio(WinSound);
-    soundEffect.play();
-  };
-
   useEffect(() => {
     setTiles(null);
     setTryCount(0);
   }, [selectedValue]);
+
+  useEffect(() => {
+    // Preload flip sound
+    flipSoundRef.current.preload = "auto";
+
+    // Preload win sound
+    winSoundRef.current.preload = "auto";
+  }, []);
+
+  const playFlipSound = () => {
+    flipSoundRef.current.play();
+  };
+
+  const playWinSound = () => {
+    winSoundRef.current.play();
+  };
 
   const getTiles = (tileCount) => {
     // Throw error if count is not even.
