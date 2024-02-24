@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import confetti from "canvas-confetti";
-import ReactAudioPlayer from "react-audio-player";
 import * as icons from "react-icons/gi";
 import { Tile } from "./Tile";
 import useDarkMode from "./hooks/theme";
 import StarField from "./components/Star";
-import soundEffectSrc from "./assets/spa-relax.mp3";
+import EndGame from "./components/EndGame";
 import Flip from "./assets/flip.wav";
 import WinSound from "./assets/bonus-point.mp3";
 
@@ -52,10 +51,11 @@ export function StartScreen({ start }) {
   );
 }
 
-export function PlayScreen({ end }) {
+export function PlayScreen({ start, end }) {
   const [tiles, setTiles] = useState(null);
   const [tryCount, setTryCount] = useState(0);
   const [selectedValue, setSelectedValue] = useState(16);
+  const [showEndGame, setShowEndGame] = useState(false);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const flipSoundRef = useRef(new Audio(Flip));
   const winSoundRef = useRef(new Audio(WinSound));
@@ -138,12 +138,12 @@ export function PlayScreen({ end }) {
 
       if (alreadyFlippedTile.content === justFlippedTile.content) {
         setTimeout(() => {
-          playWinSound();
           confetti({
             ticks: 100,
             particleCount: 300,
             spread: 100,
           });
+          playWinSound();
         }, 1000);
 
         newState = "matched";
@@ -159,7 +159,7 @@ export function PlayScreen({ end }) {
 
           // If all tiles are matched, the game is over.
           if (newTiles.every((tile) => tile.state === "matched")) {
-            setTimeout(end, 0);
+            setShowEndGame(true);
           }
 
           return newTiles;
@@ -204,9 +204,18 @@ export function PlayScreen({ end }) {
             {tryCount}
           </span>
         </span>
+        {showEndGame && (
+          <EndGame
+            tryCount={tryCount}
+            start={start}
+            end={end}
+            setShowEndGame={setShowEndGame}
+            setTiles={setTiles}
+            setTryCount={setTryCount}
+          />
+        )}
 
         <StarField numStars={30} />
-
         <div className='w-full max-w-md aspect-square bg-blue-100 rounded-xl p-3 grid grid-cols-4 place-items-center gap-3 dark:bg-black/40 dark:custom-backdrop'>
           {getTiles(selectedValue).map((tile, i) => (
             <Tile key={i} flip={() => flip(i)} {...tile} />

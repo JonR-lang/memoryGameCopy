@@ -11,7 +11,7 @@ export default {
         backOfTile: "#A5B4FD",
         frontOfTile: "#6466F1",
         matchedIcon: "#C7D2FF",
-        numberOfTries: "",
+        numberOfTries: "#6466F1",
         numberOfTriesBg: "#C7D2FF",
         darkGray: "#303136",
       },

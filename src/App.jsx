@@ -17,15 +17,20 @@ function App() {
     localStorage.setItem("memoryGame", JSON.stringify(gameState));
   }, [gameState]);
 
-  useEffect(() => {
-    playBgMusic();
-  }, []);
+  // useEffect(() => {
+  //   playBgMusic();
+  // }, []);
 
   switch (gameState) {
     case "start":
       return <StartScreen start={() => setGameState("play")} />;
     case "play":
-      return <PlayScreen end={() => setGameState("start")} />;
+      return (
+        <PlayScreen
+          end={() => setGameState("start")}
+          start={() => setGameState("play")}
+        />
+      );
     default:
       throw new Error("Invalid game state " + gameState);
   }
