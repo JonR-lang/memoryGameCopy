@@ -7,6 +7,7 @@ import useDarkMode from "./hooks/theme";
 import StarField from "./components/Star";
 import soundEffectSrc from "./assets/spa-relax.mp3";
 import Flip from "./assets/flip.wav";
+import WinSound from "./assets/bonus-point.mp3";
 
 export const possibleTileContents = [
   icons.GiHearts,
@@ -70,14 +71,10 @@ export function PlayScreen({ end }) {
     soundEffect.play();
   };
 
-  const playBgMusic = () => {
-    const soundEffect = new Audio(soundEffectSrc);
+  const playWinSound = () => {
+    const soundEffect = new Audio(WinSound);
     soundEffect.play();
   };
-
-  // useEffect(() => {
-  //   playBgMusic();
-  // }, []);
 
   useEffect(() => {
     setTiles(null);
@@ -131,6 +128,7 @@ export function PlayScreen({ end }) {
 
       if (alreadyFlippedTile.content === justFlippedTile.content) {
         setTimeout(() => {
+          playWinSound();
           confetti({
             ticks: 100,
             particleCount: 300,
