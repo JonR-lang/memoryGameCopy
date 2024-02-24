@@ -32,12 +32,12 @@ export function StartScreen({ start }) {
   return (
     <>
       <button
-        className='absolute inline-flex items-center cursor-pointer right-3 top-3'
+        className='absolute inline-flex items-center cursor-pointer right-3 top-3 z-10'
         onClick={handleDarkMode}>
         <div className="w-11 h-6 bg-sky-100 focus:outline-none focus:ring-2 rounded-full dark:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-orange-500 after:rounded-full after:h-5 after:w-5 after:transition-all dark:bg-darkGray dark:after:shadow-crescent dark:after:bg-darkGray shadow-md"></div>
       </button>
       <div className='w-full h-screen flex justify-center items-center p-8 dark:custom-bg-start-mobile dark:sm:custom-bg-start custom-cursor'>
-        <div className='w-full max-w-sm aspect-square bg-pink-100 rounded-xl flex justify-center items-center flex-col space-y-8 text-pink-500 dark:text-pink-500/80 dark:bg-pink-950/20'>
+        <div className='w-full max-w-sm aspect-square bg-pink-100 rounded-xl flex justify-center items-center flex-col space-y-8 text-pink-500 dark:text-pink-500/80 dark:bg-pink-950/20 z-10'>
           <h1 className='text-5xl font-bold'>Memory</h1>
           <p>Flip over the tiles looking for pairs</p>
           <button
@@ -46,6 +46,7 @@ export function StartScreen({ start }) {
             Play
           </button>
         </div>
+        <StarField numStars={30} />
       </div>
     </>
   );
@@ -86,6 +87,7 @@ export function PlayScreen({ end }) {
   };
 
   const playWinSound = () => {
+    winSoundRef.current.volume = 0.5;
     winSoundRef.current.play();
   };
 
@@ -204,7 +206,7 @@ export function PlayScreen({ end }) {
         </span>
 
         <StarField numStars={30} />
-        <ReactAudioPlayer src={soundEffectSrc} autoPlay loop volume={0.2} />
+
         <div className='w-full max-w-md aspect-square bg-blue-100 rounded-xl p-3 grid grid-cols-4 place-items-center gap-3 dark:bg-black/40 dark:custom-backdrop'>
           {getTiles(selectedValue).map((tile, i) => (
             <Tile key={i} flip={() => flip(i)} {...tile} />
