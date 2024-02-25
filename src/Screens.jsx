@@ -5,6 +5,7 @@ import { Tile } from "./Tile";
 import useDarkMode from "./hooks/theme";
 import StarField from "./components/Star";
 import EndGame from "./components/EndGame";
+import Menu from "./components/Menu";
 import Flip from "./assets/flip.wav";
 import WinSound from "./assets/bonus-point.mp3";
 
@@ -35,7 +36,7 @@ export function StartScreen({ start }) {
         onClick={handleDarkMode}>
         <div className="w-11 h-6 bg-sky-100 focus:outline-none focus:ring-2 rounded-full dark:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-orange-500 after:rounded-full after:h-5 after:w-5 after:transition-all dark:bg-darkGray dark:after:shadow-crescent dark:after:bg-darkGray shadow-md"></div>
       </button>
-      <div className='w-full h-screen flex justify-center items-center p-8 dark:custom-bg-start-mobile dark:sm:custom-bg-start custom-cursor'>
+      <div className='w-full h-screen flex justify-center items-center p-8 dark:custom-bg-start-mobile dark:sm:custom-bg-start custom-cursor custom-bg-start-light'>
         <div className='w-full max-w-sm aspect-square bg-pink-100 rounded-xl flex justify-center items-center flex-col space-y-8 text-pink-500 dark:text-pink-500/80 dark:bg-pink-950/20 z-10'>
           <h1 className='text-5xl font-bold'>Memory</h1>
           <p>Flip over the tiles looking for pairs</p>
@@ -51,11 +52,12 @@ export function StartScreen({ start }) {
   );
 }
 
-export function PlayScreen({ start, end }) {
+export function PlayScreen({ start, end, musicMuted, setMusicMuted }) {
   const [tiles, setTiles] = useState(null);
   const [tryCount, setTryCount] = useState(0);
   const [selectedValue, setSelectedValue] = useState(16);
   const [showEndGame, setShowEndGame] = useState(false);
+  const [soundMuted, setSoundMuted] = useState(true);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const flipSoundRef = useRef(new Audio(Flip));
   const winSoundRef = useRef(new Audio(WinSound));
@@ -77,18 +79,18 @@ export function PlayScreen({ start, end }) {
   useEffect(() => {
     // Preload flip sound
     flipSoundRef.current.preload = "auto";
+    winSoundRef.current.volume = 0.5;
 
     // Preload win sound
     winSoundRef.current.preload = "auto";
   }, []);
 
   const playFlipSound = () => {
-    flipSoundRef.current.play();
+    if (soundMuted) flipSoundRef.current.play();
   };
 
   const playWinSound = () => {
-    winSoundRef.current.volume = 0.5;
-    winSoundRef.current.play();
+    if (soundMuted) winSoundRef.current.play();
   };
 
   const getTiles = (tileCount) => {
@@ -175,9 +177,13 @@ export function PlayScreen({ start, end }) {
     });
   };
 
+  //music
+  //quit
+  //scores
+
   return (
     <>
-      <div className='absolute right-3 top-3 flex gap-3 items-center z-10'>
+      <div className='absolute  flex gap-3 items-center z-10 right-0 top-2 w-full p-2 justify-end'>
         <div className='flex items-center gap-2 justify-center'>
           <p className='text-slate-800 dark:text-slate-300'>Level:</p>
           <select
@@ -196,8 +202,15 @@ export function PlayScreen({ start, end }) {
           <div className="w-11 h-6 bg-sky-100 focus:outline-none focus:ring-2 rounded-full dark:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-orange-500 after:rounded-full after:h-5 after:w-5 after:transition-all dark:bg-darkGray dark:after:shadow-crescent dark:after:bg-darkGray shadow-md"></div>
         </button>
       </div>
+      <Menu
+        end={end}
+        soundMuted={soundMuted}
+        setSoundMuted={setSoundMuted}
+        musicMuted={musicMuted}
+        setMusicMuted={setMusicMuted}
+      />
 
-      <div className='min-h-screen overflow-y-auto w-full flex items-center justify-center p-4 flex-col gap-4 text-center dark:custom-bg-mobile dark:sm:custom-bg custom-cursor'>
+      <div className='min-h-screen custom-bg-play-light overflow-y-auto w-full flex items-center justify-center p-4 flex-col gap-4 text-center dark:custom-bg-mobile dark:sm:custom-bg custom-cursor'>
         <span className='w-full flex items-center justify-center gap-2 text-xl text-indigo-600 sm:text-2xl lg:text-3xl'>
           Tries:
           <span className='inline-block sm:h-7 sm:-mt-1 rounded-md bg-numberOfTriesBg px-2 dark:bg-transparent'>

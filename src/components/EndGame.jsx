@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { possibleTileContents } from "../Screens";
-import * as icons from "react-icons/gi";
 
 const EndGame = ({
   start,
@@ -15,7 +14,6 @@ const EndGame = ({
     possibleTileContents[
       Math.floor(Math.random() * possibleTileContents.length)
     ];
-  console.log();
 
   return (
     <div className='w-full h-full fixed bg-black/70 inset-0 z-20 flex justify-center items-center overflow-hidden p-6'>

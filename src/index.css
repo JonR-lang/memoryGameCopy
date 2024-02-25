@@ -80,6 +80,24 @@
     background-size: cover;
   }
 
+  /* BELOW SHOULD BE TRANSFERRED TO THE MAIN FILE */
+
+  .custom-bg-start-light {
+    background-image: radial-gradient(
+      circle 300px at center,
+      rgba(236, 72, 153, 1),
+      white
+    );
+  }
+
+  .custom-bg-play-light {
+    background-image: radial-gradient(
+      circle 400px at top right,
+      rgba(100, 102, 241, 0.3),
+      white
+    );
+  }
+
   .custom-shadow {
     box-shadow: 1px 1px 30px rgba(100, 102, 241, 0.075);
   }

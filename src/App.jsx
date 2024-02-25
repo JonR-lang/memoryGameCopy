@@ -7,28 +7,39 @@ function App() {
     const savedState = JSON.parse(localStorage.getItem("memoryGame"));
     return savedState || "start";
   });
-  const playBgMusic = () => {
-    const bgMusic = new Audio(BackGroundMusic);
-    bgMusic.volume = 0.2;
-    bgMusic.play();
-  };
+  const [musicMuted, setMusicMuted] = useState(true);
+  const bgMusic = new Audio(BackGroundMusic);
+  bgMusic.preload = "auto";
+  bgMusic.volume = 0.1;
 
   useEffect(() => {
     localStorage.setItem("memoryGame", JSON.stringify(gameState));
   }, [gameState]);
 
-  // useEffect(() => {
-  //   playBgMusic();
-  // }, []);
+  useEffect(() => {
+    if (musicMuted) bgMusic.play();
+
+    return () => {
+      bgMusic.pause();
+    };
+  }, [musicMuted]);
 
   switch (gameState) {
     case "start":
-      return <StartScreen start={() => setGameState("play")} />;
+      return (
+        <StartScreen
+          start={() => setGameState("play")}
+          musicMuted={musicMuted}
+          setMusicMuted={setMusicMuted}
+        />
+      );
     case "play":
       return (
         <PlayScreen
           end={() => setGameState("start")}
           start={() => setGameState("play")}
+          musicMuted={musicMuted}
+          setMusicMuted={setMusicMuted}
         />
       );
     default:
